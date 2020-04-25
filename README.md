@@ -6,9 +6,13 @@ So for each web project that you start, you almost always run into the same issu
 
 Webpack is a great tool in order to minify and optimize the static content that you serve to the user.  In this project, I have set up the ability to minify js and css on a Production and Development level.  On Development, you still see all of the readable code for both types of file.  On Production, the files are minified in order to save memory and optimize the user's experience.
 
+Auto Re-compile has been implemented in order to server fresh files each time they are modified.
+
 ## Express
 
 I've set up the basic framework to hook up server calls via node.  At the moment, there is only the index controller that contains calls to the root of the server, but the server is configured and ready to go.
+
+Auto Server Reload has also been implemented via nodemon.
 
 ## Moustache
 
