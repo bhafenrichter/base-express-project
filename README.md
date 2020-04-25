@@ -1,6 +1,6 @@
 # Base Express Project
 
-So for each web project that I start, I run into the same issue of reconfiguring all of same settings that I do for pretty much every other project.  The goal of this project is to create the foundation for any web project and removing any redundant code used between projects.  With that said, I have implemented the following features in order to get started.
+So for each web project that you start, you almost always run into the same issue of reconfiguring all of same settings that your previous project liekly used.  The goal of this project is to create the foundation for any web project and removing any redundant code used between projects.  With that said, currently the following features have been implemented.
 
 ## Webpack
 
