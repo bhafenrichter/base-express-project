@@ -14,7 +14,7 @@ I've set up the basic framework to hook up server calls via node.  At the moment
 
 Auto Server Reload has also been implemented via nodemon.
 
-## Moustache
+## Mustache
 
 For a rendering engine, I've set up Moustache in order be able to send data from the controller to the html.  This creates a nice MVC design structure for the app.  
 
