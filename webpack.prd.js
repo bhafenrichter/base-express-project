@@ -34,7 +34,20 @@ module.exports = merge(common, {
           MiniCssExtractPlugin.loader,                                  // injects it into css which injects it into the dom
           'css-loader',                                                 // takes CSS and turns it into JS in index.min.js
           'sass-loader'],                                               // takes scss and turns it into css
-      }                                                                 // order matters, style must come first before injecting it
+      },                                                                // order matters, style must come first before injecting it
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true, // webpack@2.x and newer
+            },
+          },
+        ],
+      }
     ]
   }
 });
