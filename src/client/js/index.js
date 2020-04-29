@@ -2,3 +2,6 @@
 import css from './../css/index.scss';
 
 import home from './pages/home';
+
+// modules
+import analytics from './modules/googleAnalytics';
