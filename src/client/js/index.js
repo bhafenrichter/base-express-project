@@ -6,3 +6,8 @@ import home from './pages/home';
 
 // modules
 import analytics from './modules/googleAnalytics';
+
+import LazyLoad from 'vanilla-lazyload';
+
+var lazyload = new LazyLoad();
+lazyload.update();
