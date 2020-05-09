@@ -1,5 +1,8 @@
 const path = require('path');
 
+const CopyPlugin = require('copy-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+
 module.exports = {
   entry: "./src/client/js/index.js",                                    // what is the entrypoint (starting) for webpack we should compile
   output: {
@@ -10,5 +13,17 @@ module.exports = {
   module: {
     rules: [
     ]
-  }
+  },
+  plugins: [  
+    new CopyPlugin([                                                    // copies the images into the dist folder
+      {
+          from: path.resolve(__dirname, "src/client/img"), 
+          to: path.resolve(__dirname, "dist/img"), 
+      }
+    ]),
+    new CompressionPlugin({                                             // compresses all of the js files via gzip
+      test: /\.js(\?.*)?$/i,
+      algorithm: "gzip",
+    })
+  ]
 }

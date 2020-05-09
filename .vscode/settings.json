@@ -1,0 +1,8 @@
+{
+  "appService.zipIgnorePattern": [
+    "node_modules{,/**}",
+    ".vscode{,/**}"
+  ],
+  "appService.defaultWebAppToDeploy": "/subscriptions/1081f946-95c9-4d35-a475-467e491185a6/resourceGroups/KindnessProject/providers/Microsoft.Web/sites/kindnessproject",
+  "appService.deploySubpath": ""
+}
