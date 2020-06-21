@@ -1,0 +1,3 @@
+interface Analytics {
+  init: Function
+}
