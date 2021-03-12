@@ -14,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.engine("html", mustache());
 app.set("view engine", "html");
-app.set("views", __dirname + "/views");
+app.set("views", __dirname + "/../views");
 
 // compress the files on the server
 app.use(compression());
