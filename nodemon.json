@@ -1,5 +1,12 @@
 {
-  "ext": "html, css, ts",
-  "watch": ["src"],
-  "exec": "ts-node src/app.ts"
+  "ignore": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "node_modules"
+  ],
+  "watch": [
+    "src"
+  ],
+  "exec": "tsc -p tsconfig.server.json && ts-node src/server/app.ts",
+  "ext": "ts"
 }
