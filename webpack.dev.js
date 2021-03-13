@@ -1,35 +1,77 @@
-const common = require('./webpack.config');
-const merge = require('webpack-merge');
 const path = require('path');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const webpack = require('webpack');
 
-const CSS_FILENAME = 'index';
+const outputDirectory = 'dist';
 
-module.exports = merge(common, {
+module.exports = {
   mode: 'development',
-  devServer: {
-    proxy: {
-      "/": "http://localhost:3000"
-    },
-    contentBase: path.join(__dirname, 'dist'),
-    // compress: true,
-    port: 3001
+  entry: ['babel-polyfill', './src/client/js/index.ts'],
+  output: {
+    path: path.join(__dirname, outputDirectory),
+    filename: './js/[name].bundle.js',
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      moduleFilename: ({ name }) => `${name.replace('/js/', '/dist/').replace('main', CSS_FILENAME)}.css`,
-    }),
-  ],
+  devtool: 'source-map',
   module: {
     rules: [
+      { test: /\.ts?$/, loader: 'ts-loader' },
       {
-        test: /\.scss$/i,
+        test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,                                  // injects it into js which injects it into the dom
-          'css-loader',                                                 // takes CSS and turns it into JS in index.min.js
-          'sass-loader'],                                               // takes scss and turns it into css
-      }                                                                 // order matters, style must come first before injecting it
-    ]
-  }
-});
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['*', '.ts', '.js', '.json', '.scss'],
+  },
+  devServer: {
+    proxy: {
+      '/': {
+        target: 'http://localhost:3000',
+      },
+    },
+    port: 3001,
+    open: true,
+    hot: true,
+    // writes to dist folder in live reload
+    // writeToDisk: true,
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      // <-- key to reducing React's size
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
+    // new webpack.optimize.AggressiveMergingPlugin(), //Merge chunks
+    // new CleanWebpackPlugin([outputDirectory]),
+    new MiniCssExtractPlugin({
+      filename: './css/main.css',
+    }),
+    new CompressionPlugin(),
+  ],
+  optimization: {
+    // minimize: true,
+    // minimizer: [new TerserPlugin()],
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
+};
